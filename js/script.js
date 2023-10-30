@@ -5,6 +5,7 @@ createApp({
     return{
       nome: 'pippo',
       tasks:[],
+      newMessage: "",
       
     }
   },
@@ -20,6 +21,11 @@ createApp({
           console.log(err);
         })
     },
+
+    addTask(){
+      console.log(this.newMessage);
+
+    }
   },
 
   mounted(){
