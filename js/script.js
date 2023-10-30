@@ -6,6 +6,7 @@ createApp({
       nome: 'pippo',
       tasks:[],
       newMessage: "",
+      apiUrl: 'server.php'
       
     }
   },
@@ -23,7 +24,16 @@ createApp({
     },
 
     addTask(){
-      console.log(this.newMessage);
+      const dataF = new FormData();
+      dataF.append('newTask', this.newMessage);
+      axios.post(this.apiUrl, dataF)
+      .then((res)=> {
+        console.log(res.data);
+        this.tasks = res.data;
+      })
+      .catch((err)=>{
+        console.log(err);
+      })
 
     }
   },
