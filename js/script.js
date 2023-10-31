@@ -5,7 +5,8 @@ createApp({
     return{
       tasks:[],
       newMessage: "",
-      apiUrl: 'server.php'
+      apiUrl: 'server.php',
+      error:null,
       
     }
   },
@@ -45,11 +46,22 @@ createApp({
       .catch((err)=>{
         console.log(err);
       })
+    },
 
+    removeTask(index){
+      const dataF = new FormData();
+      dataF.append('removeTask', index);
+      axios.post(this.apiUrl, dataF)
+      .then((res)=> {
+        this.tasks = res.data;
+      })
+      .catch((err)=>{
+        console.log(err);
+      })
     },
 
 
-    
+
   },
 
   mounted(){

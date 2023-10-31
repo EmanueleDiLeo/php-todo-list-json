@@ -19,6 +19,15 @@ if(isset($_POST['doneChange'])){
   file_put_contents('todo-list.json', json_encode($taskList));
 }
 
+if(isset($_POST['removeTask'])){
+  $indexRemove = $_POST['removeTask'];
+  if($taskList[$indexRemove]["done"]){
+    array_splice($taskList,$indexRemove,1);
+  }
+
+  file_put_contents('todo-list.json', json_encode($taskList));
+}
+
 
 header('Content-Type: application/json');
 

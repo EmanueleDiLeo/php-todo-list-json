@@ -38,14 +38,16 @@ iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H
         <input type="text" class=" form-control " placeholder="Nuovo Task" v-model.trim="newMessage" @keyup.enter="addTask">
         <button class="btn btn-outline-success " @click="addTask">Invia</button>
       </div>
+      <p>{{error}}</p>
 
       <ul class="list-group">
         <li v-for="(item, index) in tasks"
           class=" list-group-item d-flex justify-content-between align-items-center  "
           @click.stop="changeDone(index)"
+          :class="{'line': item.done}"
           >
-          <span :class="{'line': item.done}">{{item.message}}</span>
-          <button class="btn btn-outline-danger ">
+          {{item.message}}
+          <button class="btn btn-outline-danger " @click.stop="removeTask(index)">
             <i class="fa-solid fa-trash-can"></i>
           </button>
           
