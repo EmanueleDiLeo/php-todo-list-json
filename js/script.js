@@ -6,7 +6,8 @@ createApp({
       tasks:[],
       newMessage: "",
       apiUrl: 'server.php',
-      error:null,
+      isErrorNewTask:false,
+      isErrorDeleteTask:false,
       
     }
   },
@@ -24,16 +25,25 @@ createApp({
     },
 
     addTask(){
-      const dataF = new FormData();
-      dataF.append('newTask', this.newMessage);
-      axios.post(this.apiUrl, dataF)
-      .then((res)=> {
-        this.tasks = res.data;
-      })
-      .catch((err)=>{
-        console.log(err);
-      })
-      newMessage: "";
+      if(this.newMessage.length > 3){
+        const dataF = new FormData();
+        dataF.append('newTask', this.newMessage);
+        axios.post(this.apiUrl, dataF)
+        .then((res)=> {
+          this.tasks = res.data;
+        })
+        .catch((err)=>{
+          console.log(err);
+        })
+        newMessage: "";
+      }
+      else{
+        this.isErrorNewTask = true;
+        setTimeout( () => {
+          this.isErrorNewTask = false;
+        },3000);
+      }
+      
     },
 
     changeDone(index){
@@ -49,15 +59,25 @@ createApp({
     },
 
     removeTask(index){
-      const dataF = new FormData();
-      dataF.append('removeTask', index);
-      axios.post(this.apiUrl, dataF)
-      .then((res)=> {
-        this.tasks = res.data;
-      })
-      .catch((err)=>{
-        console.log(err);
-      })
+      console.log()
+      if(this.tasks[index].done){
+        const dataF = new FormData();
+        dataF.append('removeTask', index);
+        axios.post(this.apiUrl, dataF)
+        .then((res)=> {
+          this.tasks = res.data;
+        })
+        .catch((err)=>{
+          console.log(err);
+        })
+      }
+      else{
+        this.isErrorDeleteTask = true;
+        setTimeout( () => {
+          this.isErrorDeleteTask = false;
+        },3000);
+      }
+
     },
 
 

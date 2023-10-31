@@ -34,11 +34,14 @@ iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H
   <div  class="container">
     <div class="my_bg p-4">
 
-      <div class="input-group mb-5" >
-        <input type="text" class=" form-control " placeholder="Nuovo Task" v-model.trim="newMessage" @keyup.enter="addTask">
-        <button class="btn btn-outline-success " @click="addTask">Invia</button>
+      <div class="pb-5">
+        <div class="input-group mb-2" >
+          <input type="text" class=" form-control " placeholder="Nuovo Task" v-model.trim="newMessage" @keyup.enter="addTask">
+          <button class="btn btn-outline-success " @click="addTask">Invia</button>
+        </div>
+        <p v-if="isErrorNewTask">La task deve avere almeno 4 caratteri</p>
+        <p v-if="isErrorDeleteTask">Devi prima fare la task per poterla eliminare</p>
       </div>
-      <p>{{error}}</p>
 
       <ul class="list-group">
         <li v-for="(item, index) in tasks"
