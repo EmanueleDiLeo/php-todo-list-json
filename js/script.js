@@ -3,7 +3,6 @@ const { createApp } = Vue;
 createApp({
   data(){
     return{
-      nome: 'pippo',
       tasks:[],
       newMessage: "",
       apiUrl: 'server.php'
@@ -13,7 +12,7 @@ createApp({
 
   methods:{
     getList(){
-      axios.get('server.php')
+      axios.get(this.apiUrl)
         .then(result => {
           this.tasks = result.data;
           console.log(this.tasks)
@@ -28,14 +27,29 @@ createApp({
       dataF.append('newTask', this.newMessage);
       axios.post(this.apiUrl, dataF)
       .then((res)=> {
-        console.log(res.data);
+        this.tasks = res.data;
+      })
+      .catch((err)=>{
+        console.log(err);
+      })
+      newMessage: "";
+    },
+
+    changeDone(index){
+      const dataF = new FormData();
+      dataF.append('doneChange', index);
+      axios.post(this.apiUrl, dataF)
+      .then((res)=> {
         this.tasks = res.data;
       })
       .catch((err)=>{
         console.log(err);
       })
 
-    }
+    },
+
+
+    
   },
 
   mounted(){

@@ -6,9 +6,16 @@ $taskList = json_decode($taskStringJson,true);
 if(isset($_POST['newTask'])){
   $newItem = $_POST['newTask'];
   $taskList[] = array(
-    "message" => $_POST["newTask"],
+    "message" => $newItem,
     "done" => false
   );
+  file_put_contents('todo-list.json', json_encode($taskList));
+}
+
+if(isset($_POST['doneChange'])){
+  $indexDone = $_POST['doneChange'];
+  $taskList[$indexDone]["done"] = !$taskList[$indexDone]["done"];
+
   file_put_contents('todo-list.json', json_encode($taskList));
 }
 

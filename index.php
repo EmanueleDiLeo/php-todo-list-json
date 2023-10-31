@@ -25,8 +25,6 @@ iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H
 <!-- My style -->
 <link rel="stylesheet" href="css/style.css">
 
-
-
   <title>Document</title>
 </head>
 <body>
@@ -42,9 +40,15 @@ iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H
       </div>
 
       <ul class="list-group">
-        <li v-for="item in tasks"
-          class=" list-group-item ">
-          {{item.message}}
+        <li v-for="(item, index) in tasks"
+          class=" list-group-item d-flex justify-content-between align-items-center  "
+          @click.stop="changeDone(index)"
+          >
+          <span :class="{'line': item.done}">{{item.message}}</span>
+          <button class="btn btn-outline-danger ">
+            <i class="fa-solid fa-trash-can"></i>
+          </button>
+          
         </li>
       </ul>
     </div>

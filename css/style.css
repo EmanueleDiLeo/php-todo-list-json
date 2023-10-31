@@ -11,3 +11,11 @@ ul{
   border-radius: 12px;
   margin-top: 30px;
 }
+
+.line{
+  text-decoration: line-through;
+  color:red;
+}
+span{
+  cursor: pointer;
+}
